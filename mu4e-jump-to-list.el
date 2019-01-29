@@ -95,11 +95,18 @@ The string should be a valid mu4e query to select messages eligible for
       (cl-remove-if (lambda (elt) (string-match regexp elt))
 		    lists))))
 
+(defun mu4e-jump-to-list--presorted-pred (collection)
+  (lambda (string pred action)
+    (if (eq action 'metadata)
+        `(metadata (display-sort-function . ,#'identity))
+      (complete-with-action action collection string pred))))
+
 (defun mu4e-jump-to-list--prompt ()
   (funcall mu4e-completing-read-function
 	   "[mu4e] Jump to list: "
-	   (mu4e-jump-to-list--kill-lists
-	    (mu4e-jump-to-list--query))))
+	   (mu4e-jump-to-list--presorted-pred
+	    (mu4e-jump-to-list--kill-lists
+	     (mu4e-jump-to-list--query)))))
 
 ;;;###autoload
 (defun mu4e-jump-to-list (listid)
