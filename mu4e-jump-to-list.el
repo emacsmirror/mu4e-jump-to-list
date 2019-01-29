@@ -116,7 +116,7 @@ from list views."
 	       (mu4e-jump-to-list--query))))))
 
 ;;;###autoload
-(defun mu4e-jump-to-list (listid)
+(defun mu4e-jump-to-list (&optional listid)
   "Jump interactively to an existing LISTID.
 Prompt interactively for a listid to be displayed according to existing
 List-ID headers in your mu database. The IDs are displayed in
@@ -133,7 +133,7 @@ when a List-ID has been selected."
   (when listid
     (mu4e-mark-handle-when-leaving)
     (mu4e-headers-search
-     (concat (format "flag:list list:\"%s\"" listid)
+     (concat (format "list:\"%s\"" listid)
 	     " " mu4e-jump-to-list-filter))))
 
 (define-key mu4e-headers-mode-map (kbd "l") 'mu4e-jump-to-list)
