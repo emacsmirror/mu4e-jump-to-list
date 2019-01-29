@@ -101,9 +101,11 @@ The string should be a valid mu4e query to select messages eligible for
         '(metadata (display-sort-function . identity))
       (complete-with-action action collection string pred))))
 
+;; ivy-sort-functions-alist is still apparently necessary
+;; https://github.com/abo-abo/swiper/issues/1611
+(defvar ivy-sort-functions-alist)
+
 (defun mu4e-jump-to-list--prompt ()
-  ;; ivy-sort-functions-alist is still apparently necessary
-  ;; https://github.com/abo-abo/swiper/issues/1611
   (let ((ivy-sort-functions-alist nil))
     (funcall mu4e-completing-read-function
 	     "[mu4e] Jump to list: "
