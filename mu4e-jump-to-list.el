@@ -25,7 +25,7 @@
 ;;
 ;; `mu4e-jump-to-list' is bound to "l" by default in both the mu4e main
 ;; and header views and shows active lists in recency order by default,
-;; with lists with new messages first.
+;; with lists having newer messages first.
 ;;
 ;; `mu4e-jump-to-list' integrates with `mu4e-query-fragments' when
 ;; installed, allowing the use of query fragments in all filter
@@ -120,7 +120,7 @@ from list views."
   "Jump interactively to an existing LISTID.
 Prompt interactively for a listid to be displayed according to existing
 List-ID headers in your mu database. The IDs are displayed in
-recency order if a suitable `mu4e-completing-read-function' is used.
+recency order, with lists having newer messages first.
 
 Lists eligible for selection can be restricted first using
 `mu4e-jump-to-list-prefilter' and `mu4e-jump-to-list-kill-regexp'. Only
