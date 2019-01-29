@@ -56,7 +56,9 @@ The string should be a valid mu4e query to select messages eligible for
 
 ;;;###autoload
 (defcustom mu4e-jump-to-list-filter "NOT flag:trashed"
-  "Query filter used when jumping to a given listid."
+  "Query filter used when jumping to a given listid.
+The string should be a mu4e query filter to remove unwanted messages
+from list views."
   :type '(choice (const nil) (string)))
 
 ;;;###autoload
