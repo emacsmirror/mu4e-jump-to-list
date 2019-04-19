@@ -108,12 +108,16 @@ from list views."
 (defvar ivy-sort-functions-alist)
 
 (defun mu4e-jump-to-list--prompt ()
-  (let ((ivy-sort-functions-alist nil))
+  (let* ((ivy-sort-functions-alist nil)
+	 (lists (mu4e-jump-to-list--kill-lists
+		 (mu4e-jump-to-list--query)))
+	 (wrapped (if (eq mu4e-completing-read-function 'ido-completing-read)
+		      ;; ido-completing-read doesn't support the full
+		      ;; completing-read interface, but doesn't sort either
+		      lists
+		     (mu4e-jump-to-list--nosort-list lists))))
     (funcall mu4e-completing-read-function
-	     "[mu4e] Jump to list: "
-	     (mu4e-jump-to-list--nosort-list
-	      (mu4e-jump-to-list--kill-lists
-	       (mu4e-jump-to-list--query))))))
+	     "[mu4e] Jump to list: " wrapped)))
 
 ;;;###autoload
 (defun mu4e-jump-to-list (&optional listid)
