@@ -140,8 +140,11 @@ when a List-ID has been selected."
      (concat (format "list:\"%s\"" listid)
 	     " " mu4e-jump-to-list-filter))))
 
-(define-key mu4e-headers-mode-map (kbd "l") 'mu4e-jump-to-list)
-(define-key mu4e-main-mode-map (kbd "l") 'mu4e-jump-to-list)
+(if (boundp 'mu4e-search-minor-mode-map)
+    (define-key mu4e-search-minor-mode-map (kbd "l") 'mu4e-jump-to-list)
+  ;; support mu4e versions older than 1.7
+  (define-key mu4e-headers-mode-map (kbd "l") 'mu4e-jump-to-list)
+  (define-key mu4e-main-mode-map (kbd "l") 'mu4e-jump-to-list))
 
 (provide 'mu4e-jump-to-list)
 
