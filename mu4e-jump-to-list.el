@@ -81,11 +81,11 @@ from list views."
 	 (filter
 	  ;; filter by frequency while preserving recency order
 	  (format
-	   (concat "| sed -e '/^$/d' | nl | sort -k2 | uniq -c -f1"
+	   (concat "| sed -e '/^$/d' | tac | nl | sort -k2 | uniq -c -f1"
 		   "| sort -n -k2 | awk '{ if($1 > %d) print $3 }'")
 	   mu4e-jump-to-list-min-freq))
 	 (command
-	  (concat mu4e-mu-binary " find -s date -z -f v " quoted filter)))
+	  (concat mu4e-mu-binary " --nocolor find -s date -f v " quoted filter)))
     (split-string (shell-command-to-string command) "\n" t)))
 
 (defun mu4e-jump-to-list--kill-lists (lists)
