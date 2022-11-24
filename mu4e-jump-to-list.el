@@ -135,10 +135,11 @@ when a List-ID has been selected."
    (let ((listid (mu4e-jump-to-list--prompt)))
      (list listid)))
   (when listid
-    (mu4e-mark-handle-when-leaving)
-    (mu4e-headers-search
-     (concat (format "list:\"%s\"" listid)
-	     " " mu4e-jump-to-list-filter))))
+    (let ((search-func (if (fboundp 'mu4e-search) 'mu4e-search 'mu4e-headers-search)))
+      (mu4e-mark-handle-when-leaving)
+      (funcall search-func
+	       (concat (format "list:\"%s\"" listid)
+		       " " mu4e-jump-to-list-filter)))))
 
 (if (boundp 'mu4e-search-minor-mode-map)
     (define-key mu4e-search-minor-mode-map (kbd "l") 'mu4e-jump-to-list)
