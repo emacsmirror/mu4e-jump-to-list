@@ -85,7 +85,7 @@ from list views."
 		   "| sort -n -k2 | awk '{ if($1 > %d) print $3 }'")
 	   mu4e-jump-to-list-min-freq))
 	 (command
-	  (concat mu4e-mu-binary " --nocolor find -s date -z -f v " quoted filter)))
+	  (concat mu4e-mu-binary " find --nocolor -s date -z -f v " quoted filter)))
     (split-string (shell-command-to-string command) "\n" t)))
 
 (defun mu4e-jump-to-list--kill-lists (lists)
